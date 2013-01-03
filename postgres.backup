@@ -1,0 +1,472 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.1.0
+-- Dumped by pg_dump version 9.1.0
+-- Started on 2013-01-03 01:51:08
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- TOC entry 1901 (class 1262 OID 11912)
+-- Dependencies: 1900
+-- Name: postgres; Type: COMMENT; Schema: -; Owner: postgres
+--
+
+COMMENT ON DATABASE postgres IS 'default administrative connection database';
+
+
+--
+-- TOC entry 170 (class 3079 OID 11638)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 1904 (class 0 OID 0)
+-- Dependencies: 170
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+--
+-- TOC entry 169 (class 3079 OID 16384)
+-- Name: adminpack; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS adminpack WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 1905 (class 0 OID 0)
+-- Dependencies: 169
+-- Name: EXTENSION adminpack; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION adminpack IS 'administrative functions for PostgreSQL';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 163 (class 1259 OID 17601)
+-- Dependencies: 6
+-- Name: aluno; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE aluno (
+    id_aluno integer NOT NULL,
+    ra character varying(20)
+);
+
+
+ALTER TABLE public.aluno OWNER TO postgres;
+
+--
+-- TOC entry 166 (class 1259 OID 17637)
+-- Dependencies: 6
+-- Name: area_conhecimento; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE area_conhecimento (
+    id_area_conhecimento integer NOT NULL,
+    nome character varying(40),
+    descricao character(2000)
+);
+
+
+ALTER TABLE public.area_conhecimento OWNER TO postgres;
+
+--
+-- TOC entry 162 (class 1259 OID 17599)
+-- Dependencies: 6
+-- Name: hibernate_sequence; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE hibernate_sequence
+    START WITH 0
+    INCREMENT BY 1
+    MINVALUE 0
+    MAXVALUE 9999999999999999
+    CACHE 1;
+
+
+ALTER TABLE public.hibernate_sequence OWNER TO postgres;
+
+--
+-- TOC entry 1906 (class 0 OID 0)
+-- Dependencies: 162
+-- Name: hibernate_sequence; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('hibernate_sequence', 113, true);
+
+
+--
+-- TOC entry 161 (class 1259 OID 17594)
+-- Dependencies: 6
+-- Name: pessoa; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE pessoa (
+    id_pessoa integer NOT NULL,
+    nome character varying(41),
+    sobrenome character varying(200),
+    email character varying(40),
+    resposta_seguranca character varying(40)
+);
+
+
+ALTER TABLE public.pessoa OWNER TO postgres;
+
+--
+-- TOC entry 167 (class 1259 OID 17662)
+-- Dependencies: 6
+-- Name: pessoa_telefone; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE pessoa_telefone (
+    id_pessoa integer NOT NULL,
+    id_telefone integer,
+    posicao integer NOT NULL
+);
+
+
+ALTER TABLE public.pessoa_telefone OWNER TO postgres;
+
+--
+-- TOC entry 168 (class 1259 OID 17677)
+-- Dependencies: 6
+-- Name: pessoa_usuario; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE pessoa_usuario (
+    id_pessoa integer NOT NULL,
+    id_usuario integer NOT NULL
+);
+
+
+ALTER TABLE public.pessoa_usuario OWNER TO postgres;
+
+--
+-- TOC entry 164 (class 1259 OID 17612)
+-- Dependencies: 6
+-- Name: telefone; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE telefone (
+    id_telefone integer NOT NULL,
+    codigo_pais character varying(10),
+    codigo_estado character varying(10),
+    numero character varying(10),
+    ramal character varying(10)
+);
+
+
+ALTER TABLE public.telefone OWNER TO postgres;
+
+--
+-- TOC entry 1907 (class 0 OID 0)
+-- Dependencies: 164
+-- Name: COLUMN telefone.numero; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN telefone.numero IS '
+';
+
+
+--
+-- TOC entry 165 (class 1259 OID 17622)
+-- Dependencies: 6
+-- Name: usuario; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE usuario (
+    id_usuario integer NOT NULL,
+    login character varying(20),
+    senha character varying(20)
+);
+
+
+ALTER TABLE public.usuario OWNER TO postgres;
+
+--
+-- TOC entry 1892 (class 0 OID 17601)
+-- Dependencies: 163
+-- Data for Name: aluno; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY aluno (id_aluno, ra) FROM stdin;
+1050	092321-5
+1080	092321-5
+1110	092321-5
+\.
+
+
+--
+-- TOC entry 1895 (class 0 OID 17637)
+-- Dependencies: 166
+-- Data for Name: area_conhecimento; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY area_conhecimento (id_area_conhecimento, nome, descricao) FROM stdin;
+\.
+
+
+--
+-- TOC entry 1891 (class 0 OID 17594)
+-- Dependencies: 161
+-- Data for Name: pessoa; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY pessoa (id_pessoa, nome, sobrenome, email, resposta_seguranca) FROM stdin;
+1050	Alis	Henrique Ferri	\N	\N
+1080	Alis	Henrique Ferri	\N	\N
+1110	Alis	Henrique Ferri	\N	\N
+\.
+
+
+--
+-- TOC entry 1896 (class 0 OID 17662)
+-- Dependencies: 167
+-- Data for Name: pessoa_telefone; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY pessoa_telefone (id_pessoa, id_telefone, posicao) FROM stdin;
+1050	1060	0
+1050	1061	1
+1080	1090	0
+1080	1091	1
+1110	1120	0
+1110	1121	1
+\.
+
+
+--
+-- TOC entry 1897 (class 0 OID 17677)
+-- Dependencies: 168
+-- Data for Name: pessoa_usuario; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY pessoa_usuario (id_pessoa, id_usuario) FROM stdin;
+1050	1070
+1050	1071
+1080	1100
+1080	1101
+1110	1130
+1110	1131
+\.
+
+
+--
+-- TOC entry 1893 (class 0 OID 17612)
+-- Dependencies: 164
+-- Data for Name: telefone; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY telefone (id_telefone, codigo_pais, codigo_estado, numero, ramal) FROM stdin;
+1060	\N	\N	97571-2401	\N
+1061	\N	\N	4699-1148	\N
+1090	\N	\N	97571-2401	\N
+1091	\N	\N	4699-1148	\N
+1120	\N	\N	97571-2401	\N
+1121	\N	\N	4699-1148	\N
+\.
+
+
+--
+-- TOC entry 1894 (class 0 OID 17622)
+-- Dependencies: 165
+-- Data for Name: usuario; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY usuario (id_usuario, login, senha) FROM stdin;
+1070	princesa	876
+1071	alis	678
+1100	princesa	987
+1101	alis	789
+1130	princesa	222
+1131	alis	111
+\.
+
+
+--
+-- TOC entry 1872 (class 2606 OID 17605)
+-- Dependencies: 163 163
+-- Name: XPKALUNO; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY aluno
+    ADD CONSTRAINT "XPKALUNO" PRIMARY KEY (id_aluno);
+
+
+--
+-- TOC entry 1881 (class 2606 OID 17644)
+-- Dependencies: 166 166
+-- Name: XPKAREACONHECIMENTO; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY area_conhecimento
+    ADD CONSTRAINT "XPKAREACONHECIMENTO" PRIMARY KEY (id_area_conhecimento);
+
+
+--
+-- TOC entry 1868 (class 2606 OID 17598)
+-- Dependencies: 161 161
+-- Name: XPKIDPESSOA; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY pessoa
+    ADD CONSTRAINT "XPKIDPESSOA" PRIMARY KEY (id_pessoa);
+
+
+--
+-- TOC entry 1877 (class 2606 OID 17626)
+-- Dependencies: 165 165
+-- Name: XPKIDUSUARIO; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY usuario
+    ADD CONSTRAINT "XPKIDUSUARIO" PRIMARY KEY (id_usuario);
+
+
+--
+-- TOC entry 1883 (class 2606 OID 17666)
+-- Dependencies: 167 167 167
+-- Name: XPKPESPOSPESTEL; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY pessoa_telefone
+    ADD CONSTRAINT "XPKPESPOSPESTEL" PRIMARY KEY (id_pessoa, posicao);
+
+
+--
+-- TOC entry 1885 (class 2606 OID 17681)
+-- Dependencies: 168 168 168
+-- Name: XPKPESSOAUSUARIO; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY pessoa_usuario
+    ADD CONSTRAINT "XPKPESSOAUSUARIO" PRIMARY KEY (id_pessoa, id_usuario);
+
+
+--
+-- TOC entry 1875 (class 2606 OID 17661)
+-- Dependencies: 164 164
+-- Name: XPKTELEFONE; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY telefone
+    ADD CONSTRAINT "XPKTELEFONE" PRIMARY KEY (id_telefone);
+
+
+--
+-- TOC entry 1870 (class 2606 OID 17636)
+-- Dependencies: 161 161
+-- Name: XUNEMAIL; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY pessoa
+    ADD CONSTRAINT "XUNEMAIL" UNIQUE (email);
+
+
+--
+-- TOC entry 1879 (class 2606 OID 17628)
+-- Dependencies: 165 165 165
+-- Name: XUNLOGSENHA; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY usuario
+    ADD CONSTRAINT "XUNLOGSENHA" UNIQUE (login, senha);
+
+
+--
+-- TOC entry 1873 (class 1259 OID 17611)
+-- Dependencies: 163
+-- Name: fki_XFKALUNOPESSOA; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX "fki_XFKALUNOPESSOA" ON aluno USING btree (id_aluno);
+
+
+--
+-- TOC entry 1886 (class 2606 OID 17606)
+-- Dependencies: 163 1867 161
+-- Name: XFKALUNOPESSOA; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY aluno
+    ADD CONSTRAINT "XFKALUNOPESSOA" FOREIGN KEY (id_aluno) REFERENCES pessoa(id_pessoa);
+
+
+--
+-- TOC entry 1887 (class 2606 OID 17667)
+-- Dependencies: 167 161 1867
+-- Name: XFKPESTELPESSOA; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY pessoa_telefone
+    ADD CONSTRAINT "XFKPESTELPESSOA" FOREIGN KEY (id_pessoa) REFERENCES pessoa(id_pessoa);
+
+
+--
+-- TOC entry 1888 (class 2606 OID 17672)
+-- Dependencies: 167 164 1874
+-- Name: XFKPESTELTELEFONE; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY pessoa_telefone
+    ADD CONSTRAINT "XFKPESTELTELEFONE" FOREIGN KEY (id_telefone) REFERENCES telefone(id_telefone);
+
+
+--
+-- TOC entry 1889 (class 2606 OID 17682)
+-- Dependencies: 168 1867 161
+-- Name: XFKPESUSUPESSOA; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY pessoa_usuario
+    ADD CONSTRAINT "XFKPESUSUPESSOA" FOREIGN KEY (id_pessoa) REFERENCES pessoa(id_pessoa);
+
+
+--
+-- TOC entry 1890 (class 2606 OID 17687)
+-- Dependencies: 165 168 1876
+-- Name: XFKPESUSUUSUARIO; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY pessoa_usuario
+    ADD CONSTRAINT "XFKPESUSUUSUARIO" FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario);
+
+
+--
+-- TOC entry 1903 (class 0 OID 0)
+-- Dependencies: 6
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2013-01-03 01:51:11
+
+--
+-- PostgreSQL database dump complete
+--
+
